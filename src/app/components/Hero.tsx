@@ -1,24 +1,67 @@
 'use client'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Hero() {
+  const backgrounds = [
+    "/images/bg-0.webp",
+    "/images/bg-1.webp",
+    "/images/bg-2.webp",
+    "/images/bg-3.webp"
+  ];
+
+  const [currentBg, setCurrentBg] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentBg((prev) => (prev + 1) % backgrounds.length);
+    }, 5000); // Change background every 5 seconds
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <div className="relative h-[80vh] flex items-center">
+    <div className="relative h-[80vh] flex items-center overflow-hidden">
       {/* Background Image */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/images/bg-1.webp"
-          alt="Background"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
+      <AnimatePresence mode='wait'>
+        <motion.div
+          key={currentBg}
+          className="absolute inset-0 z-0"
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1 }}
+        >
+          <Image
+            src={backgrounds[currentBg]}
+            alt="Background"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Background Indicators */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex space-x-2">
+        {backgrounds.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentBg(index)}
+            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+              currentBg === index 
+                ? 'bg-white w-6' 
+                : 'bg-white/50 hover:bg-white/80'
+            }`}
+            aria-label={`Switch to background ${index + 1}`}
+          />
+        ))}
       </div>
 
+      {/* Rest of your content */}
       <div className="relative z-10 w-full">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
