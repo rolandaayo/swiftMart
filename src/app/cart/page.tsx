@@ -32,7 +32,7 @@ export default function CartPage() {
         <p className="text-gray-600 mb-8">Add some items to your cart to see them here.</p>
         <Link 
           href="/"
-          className="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+          className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-3 rounded-lg font-medium transition-all duration-200 transform hover:scale-105"
         >
           Continue Shopping
         </Link>
@@ -41,9 +41,11 @@ export default function CartPage() {
   }
 
   return (
-    <div className="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen pt-24 pb-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8">Shopping Cart</h1>
+        <h1 className="text-3xl font-bold mb-8 bg-gradient-to-r from-blue-600 to-emerald-600 text-transparent bg-clip-text">
+          Shopping Cart
+        </h1>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
             <AnimatePresence>
@@ -58,26 +60,26 @@ export default function CartPage() {
             </AnimatePresence>
           </div>
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-md p-6 sticky top-24">
-              <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
-              <div className="space-y-2 mb-4">
-                <div className="flex justify-between">
+            <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-24">
+              <h2 className="text-xl font-semibold mb-4 text-gray-900">Order Summary</h2>
+              <div className="space-y-3 mb-6">
+                <div className="flex justify-between text-gray-600">
                   <span>Subtotal</span>
-                  <span>${totalAmount.toFixed(2)}</span>
+                  <span className="font-medium">${totalAmount.toFixed(2)}</span>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between text-gray-600">
                   <span>Shipping</span>
-                  <span>Free</span>
+                  <span className="font-medium">Free</span>
                 </div>
-                <div className="border-t pt-2 mt-2">
-                  <div className="flex justify-between font-bold">
-                    <span>Total</span>
-                    <span>${totalAmount.toFixed(2)}</span>
+                <div className="border-t pt-3 mt-3">
+                  <div className="flex justify-between">
+                    <span className="font-bold text-gray-900">Total</span>
+                    <span className="font-bold text-blue-600">${totalAmount.toFixed(2)}</span>
                   </div>
                 </div>
               </div>
               <button 
-                className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+                className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-3 rounded-lg font-medium transition-all duration-200 transform hover:scale-105"
                 onClick={() => toast.success('Checkout functionality coming soon!')}
               >
                 Proceed to Checkout
