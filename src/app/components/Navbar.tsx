@@ -39,14 +39,18 @@ export default function Navbar() {
           <div className="flex items-center space-x-6">
             <SearchBar />
 
-            <button className="text-gray-700 hover:text-blue-600 transition-colors relative group">
+            <Link 
+              href="/login"
+              className="flex items-center text-gray-700 hover:text-blue-600 transition-colors relative group"
+            >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
               </svg>
+              <span className="ml-2 hidden md:inline">Login</span>
               <span className="absolute -bottom-12 left-1/2 -translate-x-1/2 px-3 py-1 bg-gray-900 text-white text-sm rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                Account
+                Login/Register
               </span>
-            </button>
+            </Link>
 
             <button 
               onClick={() => setIsMiniCartOpen(true)}
